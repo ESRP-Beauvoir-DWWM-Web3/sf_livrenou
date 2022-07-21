@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class RegistrationFormType extends AbstractType
@@ -36,9 +37,18 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
+            ->add('plainPassword', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'required' => 'true',
+                'invalid_message' => 'Les mots de passes ne correspondent pas',
+                'first_options' => [
+                    'label' => 'Entrez votre mot de passe :',
+                    'attr' => ['class' => 'form-control']
+                ],
+                'second_options' => [
+                    'label' => 'Retapez votre mot de passe :',
+                    'attr' => ['class' => 'form-control']
+                ],
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
