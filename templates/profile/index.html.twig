@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block body %}
+<h1>Votre profil</h1>
+<p>Nom : {{ app.user.nom|capitalize }}</p>
+<p>Prénom : {{ app.user.prenom|capitalize }}</p>
+<p>Votre email de contact : {{ app.user.email }}</p>
+<p>Votre rôle : {{ dump(app.user.roles) }}</p>
+
+<div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Mon Profil</h5>
+    <p class="card-text">{{ app.user.nom }} {{ app.user.prenom }}</p>
+    <p class="card-text">{{ app.user.email }}</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+
+
+{% endblock %}
