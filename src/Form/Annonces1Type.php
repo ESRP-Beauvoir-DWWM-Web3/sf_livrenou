@@ -16,16 +16,12 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
-class AnnoncesType extends AbstractType
+class Annonces1Type extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
 
-            ->add('expediteur', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'email',
-            ])
             ->add('destinataire', TextType::class)
             ->add('adresse', TextType::class)
             ->add('codePostal', TextType::class)

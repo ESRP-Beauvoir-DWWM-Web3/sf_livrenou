@@ -12,9 +12,6 @@
 				<th>Id</th>
 				<th>Expediteur</th>
 				<th>Destinataire</th>
-				<th>Adresse</th>
-				<th>CodePostal</th>
-				<th>Ville</th>
 				<th>Description</th>
 				<th>Date_livraison</th>
 				<th>Heure_livraison</th>
@@ -22,6 +19,9 @@
 				<th>Remuneration_livreur</th>
 				<th>Commentaire</th>
 				<th>Status</th>
+				<th>Adresse</th>
+				<th>CodePostal</th>
+				<th>Ville</th>
 				<th>actions</th>
 			</tr>
 		</thead>
@@ -31,9 +31,6 @@
 					<td>{{ annonce.id }}</td>
 					<td>{{ annonce.expediteur.email }}</td>
 					<td>{{ annonce.destinataire }}</td>
-					<td>{{ annonce.adresse }}</td>
-					<td>{{ annonce.codePostal }}</td>
-					<td>{{ annonce.ville }}</td>
 					<td>{{ annonce.description }}</td>
 					<td>{{ annonce.dateLivraison ? annonce.dateLivraison|date('Y-m-d H:i:s') : '' }}</td>
 					<td>{{ annonce.heureLivraison ? annonce.heureLivraison|date('Y-m-d H:i:s') : '' }}</td>
@@ -41,18 +38,23 @@
 					<td>{{ annonce.remunerationLivreur }}</td>
 					<td>{{ annonce.commentaire }}</td>
 					<td>{{ annonce.status ? 'Yes' : 'No' }}</td>
+					<td>{{ annonce.adresse }}</td>
+					<td>{{ annonce.codePostal }}</td>
+					<td>{{ annonce.ville }}</td>
 					<td>
-						<a href="{{ path('app_annonces_show', {'id': annonce.id}) }}">show</a>
-						<a href="{{ path('app_annonces_edit', {'id': annonce.id}) }}">edit</a>
+						<a href="{{ path('app_annonces_expediteur_show', {'id': annonce.id}) }}">show</a>
+						{% if annonce.expediteur == app.user %}
+							<a href="{{ path('app_annonces_expediteur_edit', {'id': annonce.id}) }}">edit</a>
+						{% endif %}
 					</td>
 				</tr>
 			{% else %}
 				<tr>
-					<td colspan="11">no records found</td>
+					<td colspan="14">no records found</td>
 				</tr>
 			{% endfor %}
 		</tbody>
 	</table>
 
-	<a href="{{ path('app_annonces_new') }}">Create new</a>
+	<a href="{{ path('app_annonces_expediteur_new') }}">Create new</a>
 {% endblock %}

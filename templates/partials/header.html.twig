@@ -21,6 +21,7 @@
 					<li class="nav-item">
 						<a class="nav-link" href="{{ path('app_login') }}">Se connecter</a>
 					</li>
+
 					<li class="nav-item">
 						<a class="nav-link" href="{{ path('app_register') }}">Inscription livreur</a>
 					</li>
@@ -28,6 +29,18 @@
 						<a class="nav-link" href="{{ path('app_register_expediteur') }}">Inscription expediteur</a>
 					</li>
 				{% endif %}
+				<li class="nav-item">
+					<a class="nav-link" href="
+																	{% if is_granted('ROLE_ADMIN') %}
+																	{{ path('app_annonces_index') }}
+																	{% elseif is_granted('ROLE_EXPEDITEUR')%}
+																	{{ path('app_annonces_expediteur_index') }}
+																	{% else %}
+																	{{ path('app_annonces_visiteur_index') }}
+																	{% endif %}
+																">Voir les annonces</a>
+				</li>
+
 				{% if is_granted('ROLE_ADMIN') %}
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -43,6 +56,11 @@
 							</li>
 						</ul>
 					</li>
+				{% elseif is_granted('ROLE_EXPEDITEUR') %}
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_mesAnnonces_expediteur') }}">Voir mes annonces</a>
+					</li>
+
 				{% endif %}
 			</ul>
 		</div>

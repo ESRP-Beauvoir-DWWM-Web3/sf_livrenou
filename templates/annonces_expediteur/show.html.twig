@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonces{% endblock %}
+
+{% block body %}
+    <h1>Annonces</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ annonce.id }}</td>
+            </tr>
+            <tr>
+                <th>Expediteur</th>
+                <td>{{ annonce.expediteur }}</td>
+            </tr>
+            <tr>
+                <th>Destinataire</th>
+                <td>{{ annonce.destinataire }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ annonce.description }}</td>
+            </tr>
+            <tr>
+                <th>Date_livraison</th>
+                <td>{{ annonce.dateLivraison ? annonce.dateLivraison|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Heure_livraison</th>
+                <td>{{ annonce.heureLivraison ? annonce.heureLivraison|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Distance</th>
+                <td>{{ annonce.distance }}</td>
+            </tr>
+            <tr>
+                <th>Remuneration_livreur</th>
+                <td>{{ annonce.remunerationLivreur }}</td>
+            </tr>
+            <tr>
+                <th>Commentaire</th>
+                <td>{{ annonce.commentaire }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ annonce.status ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ annonce.adresse }}</td>
+            </tr>
+            <tr>
+                <th>CodePostal</th>
+                <td>{{ annonce.codePostal }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ annonce.ville }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_annonces_expediteur_index') }}">back to list</a>
+
+    <a href="{{ path('app_annonces_expediteur_edit', {'id': annonce.id}) }}">edit</a>
+
+    {{ include('annonces_expediteur/_delete_form.html.twig') }}
+{% endblock %}

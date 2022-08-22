@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Annonces;
-use App\Form\AnnoncesType;
+use App\Form\Annonces1Type;
 use App\Repository\AnnoncesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,73 +11,83 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/annonces")
+ * @Route("/expediteur/annonces")
  */
-class AnnoncesController extends AbstractController
+class AnnoncesExpediteurController extends AbstractController
 {
     /**
-     * @Route("/", name="app_annonces_index", methods={"GET"})
+     * @Route("/", name="app_annonces_expediteur_index", methods={"GET"})
      */
     public function index(AnnoncesRepository $annoncesRepository): Response
     {
-        return $this->render('annonces/index.html.twig', [
+        return $this->render('annonces_expediteur/index.html.twig', [
             'annonces' => $annoncesRepository->findAll(),
+        ]);
+    }
+    /**
+     * @Route("/mesAnnonces", name="app_mesAnnonces_expediteur", methods={"GET"})
+     */
+    public function index_mesAnnonces(AnnoncesRepository $annoncesRepository): Response
+    {
+        return $this->render('annonces_expediteur/index.html.twig', [
+            'annonces' => $annoncesRepository->findBy(['expediteur' => $this->getUser()]),
         ]);
     }
 
     /**
-     * @Route("/new", name="app_annonces_new", methods={"GET", "POST"})
+     * @Route("/new", name="app_annonces_expediteur_new", methods={"GET", "POST"})
      */
     public function new(Request $request, AnnoncesRepository $annoncesRepository): Response
     {
         $annonce = new Annonces();
-        $form = $this->createForm(AnnoncesType::class, $annonce);
+        $form = $this->createForm(Annonces1Type::class, $annonce);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $annonce->setExpediteur($this->getUser());
             $annoncesRepository->add($annonce, true);
 
-            return $this->redirectToRoute('app_annonces_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_annonces_expediteur_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('annonces/new.html.twig', [
+        return $this->renderForm('annonces_expediteur/new.html.twig', [
             'annonce' => $annonce,
             'form' => $form,
         ]);
     }
 
     /**
-     * @Route("/{id}", name="app_annonces_show", methods={"GET"})
+     * @Route("/{id}", name="app_annonces_expediteur_show", methods={"GET"})
      */
     public function show(Annonces $annonce): Response
     {
-        return $this->render('annonces/show.html.twig', [
+        return $this->render('annonces_expediteur/show.html.twig', [
             'annonce' => $annonce,
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="app_annonces_edit", methods={"GET", "POST"})
+     * @Route("/{id}/edit", name="app_annonces_expediteur_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Annonces $annonce, AnnoncesRepository $annoncesRepository): Response
     {
-        $form = $this->createForm(AnnoncesType::class, $annonce);
+        $form = $this->createForm(Annonces1Type::class, $annonce);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $annoncesRepository->add($annonce, true);
 
-            return $this->redirectToRoute('app_annonces_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_annonces_expediteur_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('annonces/edit.html.twig', [
+        return $this->renderForm('annonces_expediteur/edit.html.twig', [
             'annonce' => $annonce,
             'form' => $form,
         ]);
     }
 
     /**
-     * @Route("/{id}", name="app_annonces_delete", methods={"POST"})
+     * @Route("/{id}", name="app_annonces_expediteur_delete", methods={"POST"})
      */
     public function delete(Request $request, Annonces $annonce, AnnoncesRepository $annoncesRepository): Response
     {
@@ -85,6 +95,6 @@ class AnnoncesController extends AbstractController
             $annoncesRepository->remove($annonce, true);
         }
 
-        return $this->redirectToRoute('app_annonces_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_annonces_expediteur_index', [], Response::HTTP_SEE_OTHER);
     }
 }

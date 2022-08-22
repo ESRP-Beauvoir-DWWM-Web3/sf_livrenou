@@ -22,11 +22,6 @@ class Annonces
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $expediteur;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $destinataire;
 
     /**
@@ -102,6 +97,12 @@ class Annonces
      */
     private $ville;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="annonces")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $expediteur;
+
     public function __construct()
     {
         $this->mode_transport = new ArrayCollection();
@@ -110,18 +111,6 @@ class Annonces
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getExpediteur(): ?string
-    {
-        return $this->expediteur;
-    }
-
-    public function setExpediteur(string $expediteur): self
-    {
-        $this->expediteur = $expediteur;
-
-        return $this;
     }
 
     public function getDestinataire(): ?string
@@ -312,6 +301,18 @@ class Annonces
     public function setVille(string $ville): self
     {
         $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getExpediteur(): ?User
+    {
+        return $this->expediteur;
+    }
+
+    public function setExpediteur(?User $expediteur): self
+    {
+        $this->expediteur = $expediteur;
 
         return $this;
     }
