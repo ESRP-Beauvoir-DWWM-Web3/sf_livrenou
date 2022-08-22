@@ -1,0 +1,3 @@
+{% if app.request.get('_route') != 'app_home' %}
+	<a href="{{ path('app_home') }}">retour vers l'accueil</a>
+{% endif %}

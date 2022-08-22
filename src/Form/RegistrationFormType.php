@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -37,31 +38,26 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('plainPassword', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'required' => 'true',
-                'invalid_message' => 'Les mots de passes ne correspondent pas',
-                'first_options' => [
-                    'label' => 'Entrez votre mot de passe :',
-                    'attr' => ['class' => 'form-control']
+            ->add('password', RepeatedType::class,[
+                'type'=>PasswordType::class,
+                'invalid_message'=>'Le mot de passe et la confirmation doivent être identique',
+                'label'=>'Votre mot de passse',
+                'required'=>true,
+                'first_options'=>[
+                    'label'=>'Mot de passe',
+                    'attr'=>[
+                        'placeholder'=>'Veuillez entrez votre mot de passe'
+                    ]
                 ],
-                'second_options' => [
-                    'label' => 'Retapez votre mot de passe :',
-                    'attr' => ['class' => 'form-control']
-                ],
-                'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a password',
-                    ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
-                    ]),
-                ],
+                'second_options'=>[
+                    'label'=>'Confirmez votre le mot de passe',
+                    'attr'=>[
+                        'placeholder'=>'Veuillez confirmez votre le mot de passe'
+                    ]
+                ]])
+            
+            ->add('submit', SubmitType::class,[
+                'label'=> "S'inscrire"
             ])
         ;
     }
