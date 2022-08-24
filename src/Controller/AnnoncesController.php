@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Annonces;
 use App\Form\AnnoncesType;
 use App\Form\AnnoncesChoiceType;
+use App\Form\AnnoncesValidationType;
 use App\Repository\AnnoncesRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -105,6 +106,28 @@ class AnnoncesController extends AbstractController
         }
 
         return $this->renderForm('home/show.html.twig', [
+            'annonce' => $annonce,
+            'form' => $form,
+        ]);
+    }
+    /**
+     * @Route("/{id}/validation", name="app_annonces_validation", methods={"GET", "POST"})
+     */
+    public function validation(Request $request, Annonces $annonce, AnnoncesRepository $annoncesRepository): Response
+    {
+        $form = $this->createForm(AnnoncesValidationType::class, $annonce);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->get('status')->getData() == 'Libre') {
+                $annonce->setLivreur(null);
+            }
+            $annoncesRepository->add($annonce, true);
+
+            return $this->redirectToRoute('app_annonces_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('home/showExpediteur.html.twig', [
             'annonce' => $annonce,
             'form' => $form,
         ]);

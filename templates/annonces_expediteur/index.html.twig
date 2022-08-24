@@ -44,7 +44,9 @@
 					<td>
 						<a href="{{ path('app_annonces_expediteur_show', {'id': annonce.id}) }}">show</a>
 						{% if annonce.expediteur == app.user %}
+							<a href="{{ path('app_annonces_validation', {'id': annonce.id}) }}">accepter livreur</a>
 							<a href="{{ path('app_annonces_expediteur_edit', {'id': annonce.id}) }}">edit</a>
+
 						{% endif %}
 					</td>
 				</tr>

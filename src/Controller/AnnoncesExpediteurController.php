@@ -45,6 +45,7 @@ class AnnoncesExpediteurController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $annonce->setExpediteur($this->getUser());
+            $annonce->setStatus('Libre');
             $annoncesRepository->add($annonce, true);
 
             return $this->redirectToRoute('app_annonces_expediteur_index', [], Response::HTTP_SEE_OTHER);
