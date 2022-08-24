@@ -79,9 +79,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $annonces;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Annonces::class, mappedBy="livreur")
+     */
+    private $annoncesLivreur;
+
     public function __construct()
     {
         $this->annonces = new ArrayCollection();
+        $this->annoncesLivreur = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -281,6 +287,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($annonce->getExpediteur() === $this) {
                 $annonce->setExpediteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Annonces>
+     */
+    public function getAnnoncesLivreur(): Collection
+    {
+        return $this->annoncesLivreur;
+    }
+
+    public function addAnnoncesLivreur(Annonces $annoncesLivreur): self
+    {
+        if (!$this->annoncesLivreur->contains($annoncesLivreur)) {
+            $this->annoncesLivreur[] = $annoncesLivreur;
+            $annoncesLivreur->setLivreur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnnoncesLivreur(Annonces $annoncesLivreur): self
+    {
+        if ($this->annoncesLivreur->removeElement($annoncesLivreur)) {
+            // set the owning side to null (unless already changed)
+            if ($annoncesLivreur->getLivreur() === $this) {
+                $annoncesLivreur->setLivreur(null);
             }
         }
 

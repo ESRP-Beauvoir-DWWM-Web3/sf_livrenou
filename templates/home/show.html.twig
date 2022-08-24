@@ -14,7 +14,7 @@
 			</tr>
 			<tr>
 				<th>Expediteur</th>
-				<td>{{ annonce.expediteur }}</td>
+				<td>{{ annonce.expediteur.email }}</td>
 			</tr>
 			<tr>
 				<th>Destinataire</th>
@@ -50,11 +50,12 @@
 			</tr>
 		</tbody>
 	</table>
+	{{ form_start(form) }}
+	{{ form_widget(form) }}
+	{{ form_end(form) }}
 
 
-	<a href="{{ path('app_annonces_index') }}">back to list</a>
+	<a href="{{ path('app_home') }}">retour à l'acceuil</a>
 
-	<a href="{{ path('app_annonces_edit', {'id': annonce.id}) }}">edit</a>
 
-	{{ include('annonces/_delete_form.html.twig') }}
 {% endblock %}

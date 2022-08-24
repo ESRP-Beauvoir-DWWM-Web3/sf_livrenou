@@ -55,7 +55,7 @@ class Annonces
     private $commentaire;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="string")
      */
     private $status;
 
@@ -102,6 +102,11 @@ class Annonces
      * @ORM\JoinColumn(nullable=false)
      */
     private $expediteur;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="annoncesLivreur")
+     */
+    private $livreur;
 
     public function __construct()
     {
@@ -197,12 +202,12 @@ class Annonces
         return $this;
     }
 
-    public function isStatus(): ?bool
+    public function getStatus(): ?string
     {
         return $this->status;
     }
 
-    public function setStatus(bool $status): self
+    public function setStatus(string $status): self
     {
         $this->status = $status;
 
@@ -313,6 +318,18 @@ class Annonces
     public function setExpediteur(?User $expediteur): self
     {
         $this->expediteur = $expediteur;
+
+        return $this;
+    }
+
+    public function getLivreur(): ?User
+    {
+        return $this->livreur;
+    }
+
+    public function setLivreur(?User $livreur): self
+    {
+        $this->livreur = $livreur;
 
         return $this;
     }
