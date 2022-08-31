@@ -31,14 +31,16 @@
 				{% endif %}
 				<li class="nav-item">
 					<a class="nav-link" href="
-																																															{% if is_granted('ROLE_ADMIN') %}
-																																															{{ path('app_annonces_index') }}
-																																															{% elseif is_granted('ROLE_EXPEDITEUR')%}
-																																															{{ path('app_annonces_expediteur_index') }}
-																																															{% else %}
-																																															{{ path('app_annonces_visiteur_index') }}
-																																															{% endif %}
-																																														">Voir les annonces</a>
+																																																																													{% if is_granted('ROLE_ADMIN') %}
+																																																																													{{ path('app_annonces_index') }}
+																																																																													{% elseif is_granted('ROLE_EXPEDITEUR')%}
+																																																																													{{ path('app_annonces_expediteur_index') }}
+																																																																													{% elseif is_granted('ROLE_LIVREUR')%}
+																																																																													{{ path('app_annonces_livreur_index') }}
+																																																																													{% else %}
+																																																																													{{ path('app_annonces_visiteur_index') }}
+																																																																													{% endif %}
+																																																																												">Voir les annonces</a>
 				</li>
 
 				{% if is_granted('ROLE_ADMIN') %}
@@ -62,7 +64,7 @@
 					</li>
 				{% elseif is_granted('ROLE_LIVREUR') %}
 					<li class="nav-item">
-						<a class="nav-link" href="{{ path('app_annonces_livreur_index') }}">Voir mes livraisons</a>
+						<a class="nav-link" href="{{ path('app_mesannonces_livreur_index') }}">Voir mes livraisons</a>
 					</li>
 
 

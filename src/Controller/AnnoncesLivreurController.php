@@ -24,4 +24,14 @@ class AnnoncesLivreurController extends AbstractController
             'annonces' => $annoncesRepository->findAll(),
         ]);
     }
+
+    /**
+     * @Route("/mesannonces", name="app_mesannonces_livreur_index", methods={"GET"})
+     */
+    public function mesAnnonces(AnnoncesRepository $annoncesRepository): Response
+    {
+        return $this->render('annonces_livreur/index.html.twig', [
+            'annonces' => $annoncesRepository->findBy(['livreur' => $this->getUser(),]),
+        ]);
+    }
 }

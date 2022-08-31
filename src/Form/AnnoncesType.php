@@ -25,6 +25,7 @@ class AnnoncesType extends AbstractType
             ->add('expediteur', EntityType::class, [
                 'class' => User::class,
                 'choice_label' => 'email',
+
             ])
             ->add('destinataire', TextType::class)
             ->add('adresse', TextType::class)

@@ -6,47 +6,67 @@
 {% block body %}
 	<h1>Annonces index</h1>
 
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Expediteur</th>
-				<th>Destinataire</th>
-				<th>Description</th>
-				<th>Date_livraison</th>
-				<th>Heure_livraison</th>
-				<th>Distance</th>
-				<th>Commentaire</th>
-				<th>Status</th>
-				<th>Adresse</th>
-				<th>CodePostal</th>
-				<th>Ville</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for annonce in annonces %}
-				<tr>
-					<td>{{ annonce.id }}</td>
-					<td>{{ annonce.expediteur.email }}</td>
-					<td>{{ annonce.destinataire }}</td>
-					<td>{{ annonce.description }}</td>
-					<td>{{ annonce.dateLivraison ? annonce.dateLivraison|date('Y-m-d H:i:s') : '' }}</td>
-					<td>{{ annonce.heureLivraison ? annonce.heureLivraison|date('Y-m-d H:i:s') : '' }}</td>
-					<td>{{ annonce.distance }}</td>
-					<td>{{ annonce.remunerationLivreur }}</td>
-					<td>{{ annonce.commentaire }}</td>
-					<td>{{ annonce.status ? 'Yes' : 'No' }}</td>
-					<td>{{ annonce.adresse }}</td>
-					<td>{{ annonce.codePostal }}</td>
-					<td>{{ annonce.ville }}</td>
+	{#	<table class="table">
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th>Expediteur</th>
+									<th>Destinataire</th>
+									<th>Description</th>
+									<th>Date_livraison</th>
+									<th>Heure_livraison</th>
+									<th>Distance</th>
+									{% if app.user %}
+										<th>Remuneration livreur</th>
+									{% endif %}
+									<th>Commentaire</th>
+									<th>Status</th>
+									<th>Adresse</th>
+									<th>CodePostal</th>
+									<th>Ville</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for annonce in annonces %}
+									<tr>
+										<td>{{ annonce.id }}</td>
+										<td>{{ annonce.expediteur.nom }}</td>
+										<td>{{ annonce.destinataire }}</td>
+										<td>{{ annonce.description }}</td>
+										<td>{{ annonce.dateLivraison ? annonce.dateLivraison|date('Y-m-d H:i:s') : '' }}</td>
+										<td>{{ annonce.heureLivraison ? annonce.heureLivraison|date('Y-m-d H:i:s') : '' }}</td>
+										<td>{{ annonce.distance }}</td>
+										{% if app.user %}
+											<td>{{ annonce.remunerationLivreur }}</td>
+										{% endif %}
+										<td>{{ annonce.commentaire }}</td>
+										<td>{{ annonce.status }}</td>
+										<td>{{ annonce.adresse }}</td>
+										<td>{{ annonce.codePostal }}</td>
+										<td>{{ annonce.ville }}</td>
+					
+									</tr>
+								{% else %}
+									<tr>
+										<td colspan="14">no records found</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					#}
+	<div class="d-flex flex-wrap">
+		{% for annonce in annonces %}
 
-				</tr>
-			{% else %}
-				<tr>
-					<td colspan="14">no records found</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+			<div class="card col-12 col-md-4">
+				<div class="card-body">
+					<h5 class="card-title">{{ annonce.expediteur.nom }}</h5>
+					<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+					<p class="card-text">{{ annonce.description }}</p>
+					<a href="#" class="card-link">Card link</a>
+					<a href="#" class="card-link">Another link</a>
+				</div>
+			</div>
 
+		{% endfor %}
+	</div>
 {% endblock %}

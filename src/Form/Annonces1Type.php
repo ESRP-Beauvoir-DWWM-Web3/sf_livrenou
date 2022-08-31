@@ -22,8 +22,17 @@ class Annonces1Type extends AbstractType
     {
         $builder
 
-            ->add('destinataire', TextType::class)
-            ->add('adresse', TextType::class)
+            ->add('destinataire', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'coucou',
+                ],
+            ])
+            ->add('adresse', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
             ->add('codePostal', TextType::class)
             ->add('ville', TextType::class)
             ->add('description', TextType::class)

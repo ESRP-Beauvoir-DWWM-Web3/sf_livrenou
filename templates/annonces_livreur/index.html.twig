@@ -16,7 +16,7 @@
 				<th>Date_livraison</th>
 				<th>Heure_livraison</th>
 				<th>Distance</th>
-				<th>Remuneration_livreur</th>
+				<th>Remuneration livreur</th>
 				<th>Commentaire</th>
 				<th>Status</th>
 				<th>Adresse</th>
@@ -29,7 +29,7 @@
 			{% for annonce in annonces %}
 				<tr>
 					<td>{{ annonce.id }}</td>
-					<td>{{ annonce.expediteur.email }}</td>
+					<td>{{ annonce.expediteur.prenom }}</td>
 					<td>{{ annonce.destinataire }}</td>
 					<td>{{ annonce.description }}</td>
 					<td>{{ annonce.dateLivraison ? annonce.dateLivraison|date('Y-m-d H:i:s') : '' }}</td>
@@ -37,20 +37,25 @@
 					<td>{{ annonce.distance }}</td>
 					<td>{{ annonce.remunerationLivreur }}</td>
 					<td>{{ annonce.commentaire }}</td>
-					<td>{{ annonce.status ? 'Yes' : 'No' }}</td>
+					<td>{{ annonce.status }}</td>
 					<td>{{ annonce.adresse }}</td>
 					<td>{{ annonce.codePostal }}</td>
 					<td>{{ annonce.ville }}</td>
 					<td>
-						<a href="{{ path('app_annonces_choice', {'id': annonce.id}) }}">Prendre en charge</a>
+						{% if annonce.status == "Libre" %}
+							<a href="{{ path('app_annonces_choice', {'id': annonce.id}) }}">Prendre en charge</a>
+						{% elseif annonce.status == "pris en charge" %}
+							<p>En attente de validation</p>
+						{% elseif annonce.status == "livreur accepté" %}
+							<a href="#">Valider la livraison</a>
+						{% endif %}
 					</td>
 				</tr>
-			{% else %}
-				<tr>
-					<td colspan="14">no records found</td>
-				</tr>
-			{% endfor %}
+			</td>
 		</tbody>
-	</table>
-
-{% endblock %}
+	</tr>
+{% else %}
+	<tr>
+		<td colspan="14">no records found</td>
+	</tr>
+{% endfor %}</tbody></table>{% endblock %}

@@ -29,7 +29,7 @@
 			{% for annonce in annonces %}
 				<tr>
 					<td>{{ annonce.id }}</td>
-					<td>{{ annonce.expediteur.email }}</td>
+					<td>{{ annonce.expediteur.nom }}</td>
 					<td>{{ annonce.destinataire }}</td>
 					<td>{{ annonce.description }}</td>
 					<td>{{ annonce.dateLivraison ? annonce.dateLivraison|date('Y-m-d H:i:s') : '' }}</td>
@@ -37,26 +37,23 @@
 					<td>{{ annonce.distance }}</td>
 					<td>{{ annonce.remunerationLivreur }}</td>
 					<td>{{ annonce.commentaire }}</td>
-					<td>{{ annonce.status ? 'Yes' : 'No' }}</td>
+					<td>{{ annonce.status }}</td>
 					<td>{{ annonce.adresse }}</td>
 					<td>{{ annonce.codePostal }}</td>
 					<td>{{ annonce.ville }}</td>
 					<td>
 						<a href="{{ path('app_annonces_expediteur_show', {'id': annonce.id}) }}">show</a>
 						{% if annonce.expediteur == app.user %}
-							<a href="{{ path('app_annonces_validation', {'id': annonce.id}) }}">accepter livreur</a>
-							<a href="{{ path('app_annonces_expediteur_edit', {'id': annonce.id}) }}">edit</a>
-
+							{% if annonce.status == 'pris en charge' %}
+								<a href="{{ path('app_annonces_validation', {'id': annonce.id}) }}">accepter livreur</a>
+								{% if annonce.status == 'Libre' %}
+									<a href="{{ path('app_annonces_expediteur_edit', {'id': annonce.id}) }}">edit</a>
+								{% endif %}
+							{% endif %}
 						{% endif %}
 					</td>
 				</tr>
-			{% else %}
-				<tr>
-					<td colspan="14">no records found</td>
-				</tr>
-			{% endfor %}
+			</td>
 		</tbody>
-	</table>
-
-	<a href="{{ path('app_annonces_expediteur_new') }}">Create new</a>
-{% endblock %}
+	</tr>
+</td></tbody></tr>{% else %}<tr><td colspan="14">no records found</td></tr>{% endfor %}</tbody></table><a href="{{ path('app_annonces_expediteur_new') }}">Create new</a>{% endblock %}

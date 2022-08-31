@@ -40,19 +40,15 @@
 					<td>{{ annonce.distance }}</td>
 					<td>{{ annonce.remunerationLivreur }}</td>
 					<td>{{ annonce.commentaire }}</td>
-					<td>{{ annonce.status ? 'Yes' : 'No' }}</td>
+					<td>{{ annonce.status }}</td>
 					<td>
 						<a href="{{ path('app_annonces_show', {'id': annonce.id}) }}">show</a>
-						<a href="{{ path('app_annonces_edit', {'id': annonce.id}) }}">edit</a>
+						{% if annonce.status == 'livreur accepté' %}
+							<a href="{{ path('app_annonces_edit', {'id': annonce.id}) }}">edit</a>
+						{% endif %}
 					</td>
 				</tr>
-			{% else %}
-				<tr>
-					<td colspan="11">no records found</td>
-				</tr>
-			{% endfor %}
+			</td>
 		</tbody>
-	</table>
-
-	<a href="{{ path('app_annonces_new') }}">Create new</a>
-{% endblock %}
+	</tr>
+</td></tbody></tr>{% else %}<tr><td colspan="11">no records found</td></tr>{% endfor %}</tbody></table><a href="{{ path('app_annonces_new') }}">Create new</a>{% endblock %}
