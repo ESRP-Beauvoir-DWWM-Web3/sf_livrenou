@@ -31,20 +31,20 @@
 				{% endif %}
 				<li class="nav-item">
 					<a class="nav-link" href="
-																																																																																																																							{% if is_granted('ROLE_ADMIN') %}
-																																																																																																																							{{ path('app_annonces_index') }}
-																																																																																																																							{% elseif is_granted('ROLE_EXPEDITEUR')%}
-																																																																																																																							{{ path('app_annonces_expediteur_index') }}
-																																																																																																																							{% elseif is_granted('ROLE_LIVREUR')%}
-																																																																																																																							{{ path('app_annonces_livreur_index') }}
-																																																																																																																							{% else %}
-																																																																																																																							{{ path('app_annonces_visiteur_index') }}
-																																																																																																																							{% endif %}
-																																																																																																																						">Voir les annonces</a>
+					{% if is_granted('ROLE_ADMIN') %}
+					{{ path('app_annonces_index') }}
+					{% elseif is_granted('ROLE_EXPEDITEUR')%}
+					{{ path('app_annonces_expediteur_index') }}
+					{% elseif is_granted('ROLE_LIVREUR')%}
+					{{ path('app_annonces_livreur_index') }}
+					{% else %}
+					{{ path('app_annonces_visiteur_index') }}
+					{% endif %}
+					">Voir les annonces</a>
 				</li>
 
-				{% if is_granted('ROLE_ADMIN') %}
-					<li class="nav-item dropdown">
+ 				{% if is_granted('ROLE_ADMIN') %}
+  					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 							Back-office
 						</a>
@@ -56,24 +56,26 @@
 							<li>
 								<a class="dropdown-item" href="{{ path('app_annonces_index') }}">Gérer les Annonces</a>
 							</li>
+							<li>
+								<a class="dropdown-item" href="{{ path('app_user_index') }}">Gérer les Utilisateurs</a>
+							</li>
 						</ul>
 					</li>
-				{% elseif is_granted('ROLE_EXPEDITEUR') %}
-					<li class="nav-item">
+ 				{% elseif is_granted('ROLE_EXPEDITEUR') %}
+  					<li class="nav-item">
 						<a class="nav-link" href="{{ path('app_mesAnnonces_expediteur') }}">Voir mes annonces</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="{{ path('app_annonces_expediteur_new') }}">Créer annonces</a>
 					</li>
 
-				{% elseif is_granted('ROLE_LIVREUR') %}
-					<li class="nav-item">
+    					<li class="nav-item">
 						<a class="nav-link" href="{{ path('app_mesannonces_livreur_index') }}">Voir mes livraisons</a>
 					</li>
 
 
-				{% endif %}
-			</ul>
+ 				{% endif %}
+  			</ul>
 		</div>
 	</div>
 </nav>

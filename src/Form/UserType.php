@@ -3,12 +3,15 @@
 namespace App\Form;
 
 use App\Entity\User;
-use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class UserType extends AbstractType
 {
@@ -39,17 +42,33 @@ class UserType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])            
-            ->add('password', PasswordType::class)
-            ->add('nom', TextType::class)
-            ->add('prenom', TextType::class)
-            ->add('nomEntreprise', TextType::class)
-            ->add('address', TextareaType::class, [
+            ->add('password', PasswordType::class, [
+                'attr' => [
+                    'class'=>'form-control'
+                ]
+            ])
+            ->add('nom', TextType::class, [
+                'attr' => [
+                    'class'=>'form-control'
+                ]
+            ])
+            ->add('prenom', TextType::class,[
+                'attr' => [
+                    'class'=>'form-control'
+                ]
+            ])
+            ->add('nomEntreprise', TextType::class,[
+                'attr' => [
+                    'class'=>'form-control'
+                ]
+            ])
+            ->add('adresse', TextareaType::class, [
                 'label'=>'Entrez une adresse :',
                 'attr' => [
                     'class' => 'form-control'
                 ]
             ])
-            ->add('zipCode',IntegerType::class, [
+            ->add('codePostal',IntegerType::class, [
                 'label'=>'Entrez un code postal :',
                 'attr' => [
                     'class' => 'form-control'
