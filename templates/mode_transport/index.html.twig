@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ModeTransport index{% endblock %}
+
+{% block body %}
+    <h1>ModeTransport index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Impact_carbone</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for mode_transport in mode_transports %}
+            <tr>
+                <td>{{ mode_transport.id }}</td>
+                <td>{{ mode_transport.titre }}</td>
+                <td>{{ mode_transport.impactCarbone }}</td>
+                <td>
+                    <a href="{{ path('app_mode_transport_show', {'id': mode_transport.id}) }}">show</a>
+                    <a href="{{ path('app_mode_transport_edit', {'id': mode_transport.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_mode_transport_new') }}">Create new</a>
+{% endblock %}

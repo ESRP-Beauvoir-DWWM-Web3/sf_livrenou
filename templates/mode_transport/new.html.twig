@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ModeTransport{% endblock %}
+
+{% block body %}
+    <h1>Create new ModeTransport</h1>
+
+    {{ include('mode_transport/_form.html.twig') }}
+
+    <a href="{{ path('app_mode_transport_index') }}">back to list</a>
+{% endblock %}

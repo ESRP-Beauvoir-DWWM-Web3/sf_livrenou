@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Mon compte - Livrénou!
+{% endblock %}
+
+{% block body %}
+	<h1>Mon compte</h1>
+	Bienvenue
+			dans votre compte
+	{{ app.user.prenom }}
+
+	<hr>
+	-Modifier mon mdp
+	<br/>
+	-tout ce qui est en cours 📦 💸
+	<br/>
+	-Mes annonces 📢
+
+	<hr>
+{% endblock %}

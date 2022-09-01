@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Poids{% endblock %}
+
+{% block body %}
+    <h1>Create new Poids</h1>
+
+    {{ include('poids/_form.html.twig') }}
+
+    <a href="{{ path('app_poids_index') }}">back to list</a>
+{% endblock %}
