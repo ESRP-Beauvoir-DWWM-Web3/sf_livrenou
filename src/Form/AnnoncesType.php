@@ -63,7 +63,12 @@ class AnnoncesType extends AbstractType
             ])
             ->add('mode_transport', EntityType::class, [
                 'class' => ModeTransport::class,
-                'choice_label' => 'titre',
+                'choice_label' => [
+                    'Voiture' => 'Voiture',
+                    'Scooter' => 'Scooter',
+                    'Velo' => 'Vélo',
+                    'autre' => 'autre'
+                ],
                 'multiple' => 'true'
             ]);
     }

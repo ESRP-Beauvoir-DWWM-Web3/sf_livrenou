@@ -25,19 +25,48 @@ class Annonces1Type extends AbstractType
             ->add('destinataire', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'coucou',
+                    'placeholder' => 'Entrez le nom de destinataire'
                 ],
             ])
             ->add('adresse', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
+                    'placeholder' => 'Entrer l\'adresse de destinataire'
+
                 ],
             ])
-            ->add('codePostal', TextType::class)
-            ->add('ville', TextType::class)
-            ->add('description', TextType::class)
-            ->add('date_livraison', DateTimeType::class)
-            ->add('heure_livraison', DateTimeType::class)
+            ->add('codePostal', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Votre code postal'
+
+                ],
+            ])
+            ->add('ville', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Quelle ville?'
+
+                ],
+            ])
+            ->add('description', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Veuillez décrire votre aanonce'
+
+                ],
+            ])
+            ->add('date_livraison', DateTimeType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
+            /*->add('heure_livraison', DateTimeType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
+            */
             ->add(
                 'distance',
                 ChoiceType::class,
@@ -46,13 +75,31 @@ class Annonces1Type extends AbstractType
                         '0 - 5' => '0 - 5',
                         '5 - 10' => '5 - 10',
                         '10 - 15' => '10 - 15',
-                        '15 - 25' => '15 -25'
-                    ]
+                        '15 - 25' => '15 -25',
+                        'placeholder' => 'Kilometre (km)'
+
+                    ],
                 ]
             )
-            ->add('remuneration_livreur', TextType::class)
-            ->add('commentaire', TextType::class)
-            ->add('status', TextType::class)
+            ->add('remuneration_livreur', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Entre la somme en €'
+
+                ],
+            ])
+            ->add('commentaire', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Si vous avez de commentaire'
+
+                ],
+            ])
+            ->add('status', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
             ->add('poids', EntityType::class, [
                 'class' => Poids::class,
                 'choice_label' => 'decription'
