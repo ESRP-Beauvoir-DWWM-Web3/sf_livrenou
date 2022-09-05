@@ -14,7 +14,7 @@ class ModeTransportType extends AbstractType
         $builder
             ->add('titre')
             ->add('impact_carbone')
-            ->add('annonces')
+            //->add('annonces')
         ;
     }
 

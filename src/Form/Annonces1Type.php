@@ -52,7 +52,7 @@ class Annonces1Type extends AbstractType
             ->add('description', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Veuillez décrire votre aanonce'
+                    'placeholder' => 'Veuillez décrire votre annonce'
 
                 ],
             ])
@@ -61,12 +61,12 @@ class Annonces1Type extends AbstractType
                     'class' => 'form-control',
                 ],
             ])
-            /*->add('heure_livraison', DateTimeType::class, [
+            ->add('heure_livraison', DateTimeType::class, [
                 'attr' => [
                     'class' => 'form-control',
                 ],
             ])
-            */
+            
             ->add(
                 'distance',
                 ChoiceType::class,

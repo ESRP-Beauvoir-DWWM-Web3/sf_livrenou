@@ -108,6 +108,11 @@ class Annonces
      */
     private $livreur;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $picture;
+
     public function __construct()
     {
         $this->mode_transport = new ArrayCollection();
@@ -330,6 +335,18 @@ class Annonces
     public function setLivreur(?User $livreur): self
     {
         $this->livreur = $livreur;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }

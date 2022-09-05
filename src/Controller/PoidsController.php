@@ -65,6 +65,7 @@ class PoidsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $poid->setStatus("actif");
             $poidsRepository->add($poid, true);
 
             return $this->redirectToRoute('app_poids_index', [], Response::HTTP_SEE_OTHER);

@@ -18,12 +18,12 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('mail', EmailType::class, [
+       /* ->add('mail', EmailType::class, [
             'label' => 'Entrez l\'email :',
             'attr' => [
                 'class' => 'form-control'
             ]
-        ])
+        ])*/
             ->add('roles', ChoiceType::class,[
                 'label' => 'Choisissez un ou plusieurs rôles :',
                 'choices' => [
@@ -33,7 +33,7 @@ class UserType extends AbstractType
                 ],
                 'choice_attr' => [
                     'Administrateur' => ['class'=>'me-1'],
-                    'Exoéditeur' => ['class'=>'ms-3 me-1'],
+                    'Expéditeur' => ['class'=>'ms-3 me-1'],
                     'Livreur' => ['class'=>'ms-3 me-1'],
                 ],
                 'multiple' => true,
@@ -80,12 +80,12 @@ class UserType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])            
-            ->add('email', EmailType::class, [
+            /*->add('email', EmailType::class, [
                 'label' => 'Entrez l\'email :',
                 'attr' => [
                     'class' => 'form-control'
                 ]
-            ])        ;
+            ])*/        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
