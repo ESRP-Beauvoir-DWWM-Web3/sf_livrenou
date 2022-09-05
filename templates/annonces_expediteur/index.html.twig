@@ -14,7 +14,6 @@
 				<th>Destinataire</th>
 				<th>Description</th>
 				<th>Date_livraison</th>
-				<th>Heure_livraison</th>
 				<th>Distance</th>
 				<th>Remuneration_livreur</th>
 				<th>Commentaire</th>
@@ -22,6 +21,7 @@
 				<th>Adresse</th>
 				<th>CodePostal</th>
 				<th>Ville</th>
+				<th>image</th>
 				<th>actions</th>
 			</tr>
 		</thead>
@@ -33,7 +33,6 @@
 					<td>{{ annonce.destinataire }}</td>
 					<td>{{ annonce.description }}</td>
 					<td>{{ annonce.dateLivraison ? annonce.dateLivraison|date('Y-m-d H:i:s') : '' }}</td>
-					<td>{{ annonce.heureLivraison ? annonce.heureLivraison|date('Y-m-d H:i:s') : '' }}</td>
 					<td>{{ annonce.distance }}</td>
 					<td>{{ annonce.remunerationLivreur }}</td>
 					<td>{{ annonce.commentaire }}</td>
@@ -41,6 +40,7 @@
 					<td>{{ annonce.adresse }}</td>
 					<td>{{ annonce.codePostal }}</td>
 					<td>{{ annonce.ville }}</td>
+					<td> <img src="{{ asset('/uploads/images/') ~ annonce.picture}}" width="100" alt="#"></td>
 					<td>
 						<a href="{{ path('app_annonces_expediteur_show', {'id': annonce.id}) }}">show</a>
 						{% if annonce.expediteur == app.user %}

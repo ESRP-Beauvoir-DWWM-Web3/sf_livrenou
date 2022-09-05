@@ -35,11 +35,6 @@ class Annonces
     private $date_livraison;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $heure_livraison;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $distance;
@@ -108,6 +103,11 @@ class Annonces
      */
     private $livreur;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $picture;
+
     public function __construct()
     {
         $this->mode_transport = new ArrayCollection();
@@ -150,18 +150,6 @@ class Annonces
     public function setDateLivraison(\DateTimeInterface $date_livraison): self
     {
         $this->date_livraison = $date_livraison;
-
-        return $this;
-    }
-
-    public function getHeureLivraison(): ?\DateTimeInterface
-    {
-        return $this->heure_livraison;
-    }
-
-    public function setHeureLivraison(\DateTimeInterface $heure_livraison): self
-    {
-        $this->heure_livraison = $heure_livraison;
 
         return $this;
     }
@@ -330,6 +318,18 @@ class Annonces
     public function setLivreur(?User $livreur): self
     {
         $this->livreur = $livreur;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }

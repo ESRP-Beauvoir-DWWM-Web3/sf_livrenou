@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Annonces;
 use App\Form\Annonces1Type;
 use App\Repository\AnnoncesRepository;
+use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,13 +38,21 @@ class AnnoncesExpediteurController extends AbstractController
     /**
      * @Route("/new", name="app_annonces_expediteur_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, AnnoncesRepository $annoncesRepository): Response
+    public function new(Request $request, AnnoncesRepository $annoncesRepository, FileUploader $fileUploader): Response
     {
         $annonce = new Annonces();
         $form = $this->createForm(Annonces1Type::class, $annonce);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // on récupère le fichier présent dans le formulaire
+            $picture = $form->get('picture')->getData();
+            // si le champs picture est renseigné (si $picture existe)
+        if($picture){
+            // on récupère le nom du fichier téléversé en même temps qu'il est placé dans le dossier public/uploads/images/
+            $fileName = $fileUploader->upload($picture);
+            // on renseigne la propriété picture de l'article avec ce nom de fichier.
+            $annonce->setPicture($fileName);}
             $annonce->setExpediteur($this->getUser());
             $annonce->setStatus('Libre');
             $annoncesRepository->add($annonce, true);
