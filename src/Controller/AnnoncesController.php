@@ -11,6 +11,8 @@ use App\Repository\AnnoncesRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
@@ -20,6 +22,7 @@ class AnnoncesController extends AbstractController
 {
     /**
      * @Route("/", name="app_annonces_index", methods={"GET"})
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_EXPEDITEUR')")
      */
     public function index(AnnoncesRepository $annoncesRepository): Response
     {
@@ -30,6 +33,7 @@ class AnnoncesController extends AbstractController
 
     /**
      * @Route("/new", name="app_annonces_new", methods={"GET", "POST"})
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_EXPEDITEUR')")
      */
     public function new(Request $request, AnnoncesRepository $annoncesRepository): Response
     {
@@ -51,6 +55,7 @@ class AnnoncesController extends AbstractController
 
     /**
      * @Route("/{id}", name="app_annonces_show", methods={"GET"})
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_EXPEDITEUR')")
      */
     public function show(Annonces $annonce): Response
     {
@@ -61,6 +66,7 @@ class AnnoncesController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="app_annonces_edit", methods={"GET", "POST"})
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_EXPEDITEUR')")
      */
     public function edit(Request $request, Annonces $annonce, AnnoncesRepository $annoncesRepository): Response
     {
@@ -81,6 +87,7 @@ class AnnoncesController extends AbstractController
 
     /**
      * @Route("/{id}", name="app_annonces_delete", methods={"POST"})
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_EXPEDITEUR')")
      */
     public function delete(Request $request, Annonces $annonce, AnnoncesRepository $annoncesRepository): Response
     {
@@ -92,6 +99,7 @@ class AnnoncesController extends AbstractController
     }
     /**
      * @Route("/{id}/choice", name="app_annonces_choice", methods={"GET", "POST"})
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_LIVREUR')")
      */
     public function choice(Request $request, Annonces $annonce, AnnoncesRepository $annoncesRepository): Response
     {
@@ -113,6 +121,7 @@ class AnnoncesController extends AbstractController
     }
     /**
      * @Route("/{id}/validation", name="app_annonces_validation", methods={"GET", "POST"})
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_EXPEDITEUR')")
      */
     public function validation(Request $request, Annonces $annonce, AnnoncesRepository $annoncesRepository): Response
     {

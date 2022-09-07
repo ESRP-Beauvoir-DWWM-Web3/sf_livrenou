@@ -5,13 +5,15 @@ namespace App\Controller;
 use App\Entity\Poids;
 use App\Form\PoidsType;
 use App\Repository\PoidsRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/poids")
+ * @IsGranted("ROLE_ADMIN")
  */
 class PoidsController extends AbstractController
 {

@@ -91,11 +91,11 @@ class Annonces1Type extends AbstractType
 
                 ],
             ])
-            ->add('status', TextType::class, [
+            /*->add('status', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
                 ],
-            ])
+            ])*/
             ->add('poids', EntityType::class, [
                 'class' => Poids::class,
                 'choice_label' => 'decription'
