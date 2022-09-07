@@ -21,7 +21,7 @@ class AnnoncesVisiteurController extends AbstractController
     public function index(AnnoncesRepository $annoncesRepository): Response
     {
         return $this->render('annonces_visiteur/index.html.twig', [
-            'annonces' => $annoncesRepository->findAll(),
+            'annonces' => $annoncesRepository->findBy(['status' => 'Libre'], ['date_livraison' => 'DESC']),
         ]);
     }
 }

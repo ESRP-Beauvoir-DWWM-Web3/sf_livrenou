@@ -28,10 +28,7 @@
 				<th>Date_livraison</th>
 				<td>{{ annonce.dateLivraison ? annonce.dateLivraison|date('Y-m-d H:i:s') : '' }}</td>
 			</tr>
-			<tr>
-				<th>Heure_livraison</th>
-				<td>{{ annonce.heureLivraison ? annonce.heureLivraison|date('Y-m-d H:i:s') : '' }}</td>
-			</tr>
+
 			<tr>
 				<th>Distance</th>
 				<td>{{ annonce.distance }}</td>
@@ -46,7 +43,7 @@
 			</tr>
 			<tr>
 				<th>Status</th>
-				<td>{{ annonce.status ? 'Yes' : 'No' }}</td>
+				<td>{{ annonce.status }}</td>
 			</tr>
 		</tbody>
 	</table>
