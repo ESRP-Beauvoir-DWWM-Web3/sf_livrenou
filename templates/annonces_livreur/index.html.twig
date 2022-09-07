@@ -14,7 +14,6 @@
 				<th>Destinataire</th>
 				<th>Description</th>
 				<th>Date_livraison</th>
-				<th>Heure_livraison</th>
 				<th>Distance</th>
 				<th>Remuneration livreur</th>
 				<th>Commentaire</th>
@@ -33,7 +32,6 @@
 					<td>{{ annonce.destinataire }}</td>
 					<td>{{ annonce.description }}</td>
 					<td>{{ annonce.dateLivraison ? annonce.dateLivraison|date('Y-m-d H:i:s') : '' }}</td>
-					<td>{{ annonce.heureLivraison ? annonce.heureLivraison|date('Y-m-d H:i:s') : '' }}</td>
 					<td>{{ annonce.distance }}</td>
 					<td>{{ annonce.remunerationLivreur }}</td>
 					<td>{{ annonce.commentaire }}</td>

@@ -5,13 +5,15 @@ namespace App\Controller;
 use App\Entity\Annonces;
 use App\Form\Annonces1Type;
 use App\Repository\AnnoncesRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/livreur/annonces")
+ * @IsGranted("ROLE_LIVREUR")
  */
 class AnnoncesLivreurController extends AbstractController
 {
