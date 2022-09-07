@@ -13,3 +13,6 @@ header nav .navbar-brand {
     color:aqua;
     font-family: 'Open Sans', sans-serif;
 }
+.d-flex flex-wrap{
+    background-color: antiquewhite;
+}

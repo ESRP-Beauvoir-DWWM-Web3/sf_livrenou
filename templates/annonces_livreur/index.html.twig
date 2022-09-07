@@ -45,7 +45,9 @@
 						{% elseif annonce.status == "pris en charge" %}
 							<p>En attente de validation</p>
 						{% elseif annonce.status == "livreur accepté" %}
-							<a href="#">Valider la livraison</a>
+							<a href="{{ path('app_annonces_colis_livre', {'id': annonce.id}) }}">Valider la livraison</a>
+							{% elseif annonce.status == "Colis  livré" %}
+
 						{% endif %}
 					</td>
 				</tr>

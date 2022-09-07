@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Annonces;
 use App\Form\AnnoncesType;
 use App\Form\AnnoncesChoiceType;
+use App\Form\AnnoncesValidLivType;
 use App\Form\AnnoncesValidationType;
 use App\Repository\AnnoncesRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -137,6 +138,27 @@ class AnnoncesController extends AbstractController
         }
 
         return $this->renderForm('home/showExpediteur.html.twig', [
+            'annonce' => $annonce,
+            'form' => $form,
+        ]);
+    }
+    /**
+     * @Route("/{id}/ValidDeliver", name="app_annonces_colis_livre", methods={"GET", "POST"})
+     */
+    public function colis_livre(Request $request, Annonces $annonce, AnnoncesRepository $annoncesRepository): Response
+    {
+        $form = $this->createForm(AnnoncesValidLivType::class, $annonce);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $annonce->setStatus('Colis livre');
+            $annonce->setLivreur($this->getUser());
+            $annoncesRepository->add($annonce, true);
+
+            return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('home/show.html.twig', [
             'annonce' => $annonce,
             'form' => $form,
         ]);
