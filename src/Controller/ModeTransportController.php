@@ -5,13 +5,15 @@ namespace App\Controller;
 use App\Entity\ModeTransport;
 use App\Form\ModeTransportType;
 use App\Repository\ModeTransportRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/transport")
+ * @IsGranted("ROLE_ADMIN")
  */
 class ModeTransportController extends AbstractController
 {
