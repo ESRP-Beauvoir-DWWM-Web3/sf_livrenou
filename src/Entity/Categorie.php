@@ -39,6 +39,11 @@ class Categorie
      */
     private $annonces;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $coef;
+
     public function __construct()
     {
         $this->annonces = new ArrayCollection();
@@ -111,6 +116,18 @@ class Categorie
                 $annonce->setCategorie(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCoef(): ?int
+    {
+        return $this->coef;
+    }
+
+    public function setCoef(?int $coef): self
+    {
+        $this->coef = $coef;
 
         return $this;
     }

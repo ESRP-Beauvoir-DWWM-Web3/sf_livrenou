@@ -2,20 +2,18 @@
 
 namespace App\Form;
 
-use App\Entity\Categorie;
+use App\Entity\Distance;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class CategorieType extends AbstractType
+class DistanceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('titre', TextType::class)
-            ->add('description', TextType::class)
-            ->add('priorite')
+            ->add('titre')
+            ->add('description')
             ->add('coef')
         ;
     }
@@ -23,7 +21,7 @@ class CategorieType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Categorie::class,
+            'data_class' => Distance::class,
         ]);
     }
 }

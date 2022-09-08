@@ -15,6 +15,7 @@ class TailleType extends AbstractType
             ->add('titre')
             ->add('description')
             ->add('status')
+            ->add('coef')
         ;
     }
 
