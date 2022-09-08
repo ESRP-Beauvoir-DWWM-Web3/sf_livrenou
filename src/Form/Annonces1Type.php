@@ -6,6 +6,7 @@ use App\Entity\Poids;
 use App\Entity\Taille;
 use App\Entity\Annonces;
 use App\Entity\Categorie;
+use App\Entity\Distance;
 use App\Entity\ModeTransport;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -63,18 +64,36 @@ class Annonces1Type extends AbstractType
                     'class' => 'form-control',
                 ],
             ])
-            ->add(
-                'distance',
-                ChoiceType::class,
-                [
-                    'choices' => [
-                        '0 - 5' => '0 - 5',
-                        '5 - 10' => '5 - 10',
-                        '10 - 15' => '10 - 15',
-                        '15 - 25' => '15 -25',
-                        'placeholder' => 'Kilometre (km)'
+            ->add('commentaire', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Si vous avez de commentaire'
 
-                    ],
+                ],
+            ])
+            ->add('categorie', EntityType::class, [
+                'class' => Categorie::class,
+                'choice_label' => function(Categorie $categorie){
+                    return $categorie->getTitre().' - coef '.$categorie->getCoef();
+                },
+            ])
+            ->add('poids', EntityType::class, [
+                'class' => Poids::class,
+            'choice_label' => function(Poids $poids){
+                return $poids->getTitre().' - coef '.$poids->getCoef();
+            }
+            ])
+            ->add('taille', EntityType::class, [
+                'class' => Taille::class,
+                'choice_label' => function(Taille $taille){
+                    return $taille->getTitre().' - coef '.$taille->getCoef();
+                }
+                ])
+            ->add('distance', EntityType::class, [
+                    'class' => Distance::class,
+                    'choice_label' => function(Distance $distance){
+                        return $distance->getTitre().' - coef '.$distance->getCoef();
+                    }
                 ]
             )
             ->add('remuneration_livreur', TextType::class, [
@@ -83,30 +102,6 @@ class Annonces1Type extends AbstractType
                     'placeholder' => 'Entre la somme en €'
 
                 ],
-            ])
-            ->add('commentaire', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'Si vous avez de commentaire'
-
-                ],
-            ])
-            /*->add('status', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-            ])*/
-            ->add('poids', EntityType::class, [
-                'class' => Poids::class,
-                'choice_label' => 'decription'
-            ])
-            ->add('categorie', EntityType::class, [
-                'class' => Categorie::class,
-                'choice_label' => 'titre',
-            ])
-            ->add('taille', EntityType::class, [
-                'class' => Taille::class,
-                'choice_label' => 'titre',
             ])
             ->add('mode_transport', EntityType::class, [
                 'class' => ModeTransport::class,

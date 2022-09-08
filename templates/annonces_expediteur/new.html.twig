@@ -2,11 +2,11 @@
 
 {% block title %}New Annonces
 {% endblock %}
-
 {% block body %}
 	<h1>Créez votre annonce</h1>
 
 	{{ include('annonces_expediteur/_form.html.twig') }}
 
 	<a href="{{ path('app_annonces_expediteur_index') }}">back to list</a>
+	<script src="{{ asset('js/script.js') }}"></script>
 {% endblock %}

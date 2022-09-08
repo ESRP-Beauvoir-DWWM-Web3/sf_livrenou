@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\PoidsRepository;
+use App\Repository\DistanceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=PoidsRepository::class)
+ * @ORM\Entity(repositoryClass=DistanceRepository::class)
  */
-class Poids
+class Distance
 {
     /**
      * @ORM\Id
@@ -25,24 +25,24 @@ class Poids
     private $titre;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text", nullable=true)
      */
-    private $decription;
+    private $description;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="boolean")
      */
-    private $status;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Annonces::class, mappedBy="poids")
-     */
-    private $annonces;
+    private $isActive;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $coef;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Annonces::class, mappedBy="distance")
+     */
+    private $annonces;
 
     public function __construct()
     {
@@ -66,26 +66,38 @@ class Poids
         return $this;
     }
 
-    public function getDecription(): ?string
+    public function getDescription(): ?string
     {
-        return $this->decription;
+        return $this->description;
     }
 
-    public function setDecription(string $decription): self
+    public function setDescription(?string $description): self
     {
-        $this->decription = $decription;
+        $this->description = $description;
 
         return $this;
     }
 
-    public function getStatus(): ?string
+    public function isIsActive(): ?bool
     {
-        return $this->status;
+        return $this->isActive;
     }
 
-    public function setStatus(string $status): self
+    public function setIsActive(bool $isActive): self
     {
-        $this->status = $status;
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    public function getCoef(): ?int
+    {
+        return $this->coef;
+    }
+
+    public function setCoef(?int $coef): self
+    {
+        $this->coef = $coef;
 
         return $this;
     }
@@ -102,7 +114,7 @@ class Poids
     {
         if (!$this->annonces->contains($annonce)) {
             $this->annonces[] = $annonce;
-            $annonce->setPoids($this);
+            $annonce->setDistance($this);
         }
 
         return $this;
@@ -112,22 +124,10 @@ class Poids
     {
         if ($this->annonces->removeElement($annonce)) {
             // set the owning side to null (unless already changed)
-            if ($annonce->getPoids() === $this) {
-                $annonce->setPoids(null);
+            if ($annonce->getDistance() === $this) {
+                $annonce->setDistance(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getCoef(): ?int
-    {
-        return $this->coef;
-    }
-
-    public function setCoef(?int $coef): self
-    {
-        $this->coef = $coef;
 
         return $this;
     }

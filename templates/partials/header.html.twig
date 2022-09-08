@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg bg-light">
-<img src="Documents/images/Logo_Livrénou.png"> 
+<img  src="{{ asset('assets/images/Logo_Livrénou.png') }}"> 
 	<div class="container-fluid">
 		{% if app.user %}
 			<a class="navbar-brand" href="#">Bonjour,
@@ -32,16 +32,15 @@
 				{% endif %}
 				<li class="nav-item">
 					<a class="nav-link" href="
-																																																																																																																																									{% if is_granted('ROLE_ADMIN') %}
-																																																																																																																																									{{ path('app_annonces_index') }}
-																																																																																																																																									{% elseif is_granted('ROLE_EXPEDITEUR')%}
-																																																																																																																																									{{ path('app_annonces_expediteur_index') }}
-																																																																																																																																									{% elseif is_granted('ROLE_LIVREUR')%}
-																																																																																																																																									{{ path('app_annonces_livreur_index') }}
-																																																																																																																																									{% else %}
-																																																																																																																																									{{ path('app_annonces_visiteur_index') }}
-																																																																																																																																									{% endif %}
-																																																																																																																																								">Voir les annonces</a>
+					{% if is_granted('ROLE_ADMIN') %}
+					{{ path('app_annonces_index') }}
+					{% elseif is_granted('ROLE_EXPEDITEUR')%}
+					{{ path('app_annonces_expediteur_index') }}
+					{% elseif is_granted('ROLE_LIVREUR')%}
+					{{ path('app_annonces_livreur_index') }}
+					{% else %}
+					{{ path('app_annonces_visiteur_index') }}
+					{% endif %}">Voir les annonces</a>
 				</li>
 
 				{% if is_granted('ROLE_ADMIN') %}
@@ -51,14 +50,23 @@
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<li>
-								<a class="dropdown-item" href="{{ path('app_categorie_index') }}">Gérer les catégories</a>
+								<a class="dropdown-item" href="{{ path('app_categorie_index') }}">Gestion des catégories</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="{{ path('app_poids_index') }}">Gestion des poids</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="{{ path('app_taille_index') }}">Gestion des tailles</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="{{ path('app_mode_transport_index') }}">Gestion mode de transports</a>
 							</li>
 
 							<li>
-								<a class="dropdown-item" href="{{ path('app_annonces_index') }}">Gérer les Annonces</a>
+								<a class="dropdown-item" href="{{ path('app_annonces_index') }}">Gestion des Annonces</a>
 							</li>
 							<li>
-								<a class="dropdown-item" href="{{ path('app_user_index') }}">Géstion d'utilisateur</a>
+								<a class="dropdown-item" href="{{ path('app_user_index') }}">Gestion des utilisateurs</a>
 							</li>
 						</ul>
 					</li>

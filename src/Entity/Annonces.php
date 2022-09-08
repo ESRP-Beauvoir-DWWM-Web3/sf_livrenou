@@ -34,10 +34,6 @@ class Annonces
      */
     private $date_livraison;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $distance;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -108,6 +104,12 @@ class Annonces
      */
     private $picture;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Distance::class, inversedBy="annonces")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $distance;
+
     public function __construct()
     {
         $this->mode_transport = new ArrayCollection();
@@ -154,17 +156,6 @@ class Annonces
         return $this;
     }
 
-    public function getDistance(): ?string
-    {
-        return $this->distance;
-    }
-
-    public function setDistance(string $distance): self
-    {
-        $this->distance = $distance;
-
-        return $this;
-    }
 
     public function getRemunerationLivreur(): ?string
     {
@@ -330,6 +321,18 @@ class Annonces
     public function setPicture(?string $picture): self
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    public function getDistance(): ?Distance
+    {
+        return $this->distance;
+    }
+
+    public function setDistance(?Distance $distance): self
+    {
+        $this->distance = $distance;
 
         return $this;
     }

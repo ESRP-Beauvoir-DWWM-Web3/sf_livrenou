@@ -15,6 +15,7 @@ class PoidsType extends AbstractType
             ->add('titre')
             ->add('decription')
             ->add('status')
+            ->add('coef')
         ;
     }
 
